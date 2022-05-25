@@ -1,5 +1,5 @@
 # CrackYourPlacement
-# 1 def findDuplicate(self, nums):
+# 1 
 def findDuplicate(self, nums):
         for ele in nums:
             x=abs(ele)
@@ -94,3 +94,120 @@ def twoSum(self, nums, target):
             if prices[i] - prices[i-1]>0:
                 profit+=prices[i] - prices[i-1]
         return profit
+
+# 9
+ def subarraysDivByK(self, nums, k):
+        c=0
+        curr_sum=0
+        dict={0:1}
+        for i in range(len(nums)):
+            curr_sum+=nums[i]
+            r=((curr_sum%k)+k)%k
+            c+=dict.get(r,0)
+            dict[r]=dict.get(r,0)+1
+         
+        return c
+# 10
+def maxArea(self, height):
+        l=0
+        r=len(height)-1
+        maxarea=0
+        while l<r:
+            width=r-l
+            maxarea=max(maxarea,(width)*min(height[l],height[r]))
+            
+            if height[l]<height[r]:
+                l+=1
+            else:
+                r=r-1
+        return maxarea
+# 11
+def threeSum(self, nums):
+        nums.sort()
+        n=len(nums)
+        ans=[]
+        checkset=set()
+        for i in range(n):
+            x=nums[i]
+            s=i+1
+            e=n-1
+            t=0-x
+            while s<e:
+                st=nums[s]+nums[e]
+                if st>t:
+                    e=e-1
+                elif st<t:
+                    s+=1
+                else:
+                    d=str(x)+str(nums[s])+str(nums[e])
+                    if d in checkset:
+                        s+=1
+                        e-=1
+                        
+                    else:
+                        checkset.add(d)
+                    
+                        ans.append([x,nums[s],nums[e]])
+                        s+=1
+                        e-=1
+                    
+        return ans
+                
+               
+# 12
+def fourSum(self, nums, target):
+        nums.sort()
+        n=len(nums)
+        checkset=set()
+        ans=[]
+        for j in range(n-3):
+            
+            for i in range(j+1,n-2):
+                x=nums[j]+nums[i]
+                s=i+1
+                e=n-1
+                t=target-x
+                while s<e:
+                    ss=nums[e]+nums[s]
+                    if ss>t:
+                        e=e-1
+                    elif ss<t:
+                        s+=1
+                    else:
+                        c_set=str(nums[j])+str(nums[i])+str(nums[s])+str(nums[e])
+                        if c_set in checkset:
+                            s+=1
+                            e=e-1
+                        else:
+                            ans.append([nums[j],nums[i],nums[s],nums[e]])
+                            checkset.add(c_set)
+                            s+=1
+                            e=e-1
+        return ans
+                      
+# 13
+def maxScore(self, cardPoints, k):
+        rest=sum(cardPoints[:k])
+        total=rest
+        for i in range(k-1,-1,-1):
+            rest=rest-cardPoints[i]+cardPoints[i-k]
+            total=max(total,rest)
+        return total
+# 14
+def subarraySum(self, nums, k):
+        c=0
+        s={}
+        curr=0
+        for i in range(len(nums)):
+            curr+=nums[i]
+            if curr==k:
+                c+=1
+            if curr-k in s:
+                c+=s.get(curr-k)
+            s[curr]=s.get(curr,0)+1
+        return c
+# 15
+
+# 16
+
+                   
