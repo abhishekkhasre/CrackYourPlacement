@@ -1,10 +1,5 @@
 # CrackYourPlacement
 # 1 def findDuplicate(self, nums):
-
-
-
-
-
 def findDuplicate(self, nums):
         for ele in nums:
             x=abs(ele)
