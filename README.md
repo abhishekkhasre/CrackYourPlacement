@@ -206,8 +206,95 @@ def subarraySum(self, nums, k):
                 c+=s.get(curr-k)
             s[curr]=s.get(curr,0)+1
         return c
+
 # 15
+def spiralOrder(self, matrix):
+        m_cols=len(matrix[0])
+        n_rows=len(matrix)
+        total = m_cols*n_rows
+        r=0
+        c=0
+        t=0
+        ans=[]
+        while t<total :
+            
+            for i in range(c,m_cols):
+                ans.append(matrix[r][i])
+                t+=1
+            r+=1
+            
+            for i in range(r,n_rows):
+                ans.append(matrix[i][m_cols-1])
+                t+=1
+                
+            m_cols-=1
+            
+            for i in range(m_cols-1,c-1,-1):
+                ans.append(matrix[n_rows-1][i])
+                t+=1
+            n_rows-=1
+                
+            for i in range(n_rows-1,r-1,-1):
+                ans.append(matrix[i][c])
+                t+=1
+            c+=1
+            
+        return ans  
 
 # 16
+def canJump(self, nums):
+        max_index=0
+        for i in range(len(nums)):
+            if i>max_index:
+                return False
+            else:
+                max_index=max(max_index,i+nums[i])
+        return True
+              
+
+# 17
+f=m+n-1
+        e1=m-1
+        e2=n-1
+        if n==0:
+            return
+        elif m==0:
+            while nums1:
+                nums1.pop()
+            nums1.extend(nums2)
+            return
+        while f>=0 and e1>=0 and e2>=0:
+            if nums1[e1]>nums2[e2]:
+                nums1[f]=nums1[e1]
+                e1-=1
+            else:
+                nums1[f]=nums2[e2]
+                e2-=1
+            f=f-1
+        while f>=0 and e2>=0:
+            nums1[f]=nums2[e2]
+            e2-=1
+            f=f-1
+
+# 18
+def reversePairs(self, nums):
+        c=0
+        for i in range(len(nums)):
+            x=nums[i]
+            for j in range(i+1,len(nums)):
+                if nums[i]>2*nums[j]:
+                    c+=1
+        return c
+# 19
+
+# 20
+
+# 21
+
+# 22
+
+# 23
+
+# 24
 
                    
