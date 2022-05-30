@@ -208,38 +208,36 @@ def subarraySum(self, nums, k):
         return c
 
 # 15
-def spiralOrder(self, matrix):
-        m_cols=len(matrix[0])
-        n_rows=len(matrix)
-        total = m_cols*n_rows
-        r=0
-        c=0
-        t=0
-        ans=[]
-        while t<total :
-            
-            for i in range(c,m_cols):
-                ans.append(matrix[r][i])
-                t+=1
-            r+=1
-            
-            for i in range(r,n_rows):
-                ans.append(matrix[i][m_cols-1])
-                t+=1
-                
-            m_cols-=1
-            
-            for i in range(m_cols-1,c-1,-1):
-                ans.append(matrix[n_rows-1][i])
-                t+=1
-            n_rows-=1
-                
-            for i in range(n_rows-1,r-1,-1):
-                ans.append(matrix[i][c])
-                t+=1
-            c+=1
-            
-        return ans  
+ def isValid(self, s):
+        stack=[]
+        for i in range(len(s)):
+            x=s[i]
+            if x=="(" or x=="{" or x=="[":
+                stack.append(x)
+            else:
+                if len(stack)<1:
+                    return False
+                if x==")":
+                    d=stack.pop()
+                    if d=="(":
+                        continue
+                    else:
+                        return False
+                elif x=="]":
+                    d=stack.pop()
+                    if d=="[":
+                        continue
+                    else:
+                        return False
+                else:
+                    d=stack.pop()
+                    if d=="{":
+                        continue
+                    else:
+                        return False
+        if len(stack)>=1:
+            return False
+        return True 
 
 # 16
 def canJump(self, nums):
@@ -253,7 +251,8 @@ def canJump(self, nums):
               
 
 # 17
-f=m+n-1
+def merge(self, nums1, m, nums2, n):
+        f=m+n-1
         e1=m-1
         e2=n-1
         if n==0:
@@ -286,15 +285,180 @@ def reversePairs(self, nums):
                     c+=1
         return c
 # 19
+def strStr(self, haystack, needle):
+        n=len(needle)
+        h=len(haystack)
+        
+        for i in range(h):
+            if haystack[i:n+i]==needle:
+                return i
+        return -1
 
 # 20
+def longestCommonPrefix(self, strs):
+        m=1000000000
+        a=""
+        
+        for ele in strs:
+            if len(ele)<m:
+                a=ele
+                m=len(ele)
+        ans=""
+        for i in range(len(a)):
+            for j in range(len(strs)):
+                if strs[j][i]==a[i]:
+                    continue
+                else:
+                    return ans
+                    break
+            
+            ans+=a[i]
+        return ans
 
 # 21
-
+ def validPalindrome(self, s):
+        i=0
+        j=len(s)-1
+        while i<j:
+            if i==len(s)-1:
+                x=s[:i]
+                if x==x[::-1]:
+                    return True
+            else:
+                x=s[:i]+s[i+1:]
+                if x==x[::-1]:
+                    return True
+        return False
 # 22
-
+ def intToRoman(self, num):
+        ans=""
+        d={1:"I",5:"V",10:"X",50:"L",100:"C",500:"D",1000:"M"}
+        for i in range(len(str(num))-1,-1,-1):
+            n=num//(10**i)
+            if 1<=n<4:
+                ans+=str(d[(10**i)]*n)
+            elif n==4 or n==9:
+                ans+=str(d[10**i])+str(d[(n+1)*(10**i)])
+            elif n>=5:
+                ans+=str(d[5*(10**i)])+(d[10**i]*(n-5))
+            
+            num=num%(10**i)
+        return ans
 # 23
-
+ def generateParenthesis(self, n):
+        ans=[]
+         
+        def backtrack(s=[],l=0,r=0):
+            if len(s)==2*n:
+                ans.append("".join(s))
+                return
+            if l<n:
+                s.append("(")
+                backtrack(s,l+1,r)
+                s.pop()
+            
+            if r<l:
+                s.append(")")
+                backtrack(s,l,r+1)
+                s.pop()
+        backtrack()
+        return ans
 # 24
+def simplifyPath(self, path):
+        ans=[]
+        res=""
+        for i in range(1,len(path)):
+            if path[i]=="/":
+                if res==".":
+                    res=""
+                    continue
+                elif res=="..":
+                    if len(ans)!=0:
+                        print(ans)
+                        ans.pop()
+                    res=""
+                else:
+                    if res!="":
+                        ans.append(res)
+                    res=""
+            else:
+                res+=path[i]
+        a="/"
+        if res==".." and len(ans)!=0:
+            ans.pop()
+        else:
+            if res!="." and res!="" and res!="..":
+                ans.append(res)
+                
+                
+        for i in range(len(ans)):
+            if i==0:
+                a+=ans[i]
+            else:
+                a+="/"+ans[i]
+        return a
+                
+# 25
+def reverseWords(self, s):
+        ans=list(s.split(" "))
+        print(ans)
+        a=""
+        for i in range(len(ans)-1,-1,-1):
+            if ans[i]==" " or ans[i]=="":
+                continue
+            else:
+                if len(a)==0:
+                    a+=ans[i]
+                else:
+                    a=a+" "+ans[i]
+        return a
 
-                   
+# 26                   
+def groupAnagrams(self, strs):
+        ans=[]
+        for ele in strs:
+            x="".join(sorted(ele))
+            
+            for i in ans:
+                if i[len(i)-1]==x:
+                    s=i.pop()
+                    i.append(ele)
+                    i.append(s)
+                    break
+            else:
+                mini=[]
+                mini.append(ele)
+                mini.append(x)
+                ans.append(mini)
+        for i in ans:
+            i.pop()
+        return ans
+# 27
+
+
+# 28
+
+# 29
+
+# 30
+
+# 31
+
+# 32
+
+# 33
+
+# 34
+
+# 35
+
+# 36
+
+# 37 
+
+# 38
+
+# 39
+
+# 40
+        
